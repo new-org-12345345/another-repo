@@ -28,5 +28,5 @@ jobs:
 
       - name: Create a Dummy Commit
         if: ${{steps.check.outputs.require-result}}=='true'
-        echo: 'Hello'
+        run: "echo Hello"
 
