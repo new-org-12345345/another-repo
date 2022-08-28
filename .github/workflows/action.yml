@@ -19,11 +19,14 @@ jobs:
   CommitChange:
     runs-on: ubuntu-latest
     steps:
-      - name: Create a Dummy Commit
-        uses: actions-cool/create-dummy-commit@v1
-        id: create
-        with:
-          message: '${{{name}}} is a great person'
-          branch: 'main'
+      - uses: actions/checkout@v2
+      - name: Create report file
+        run: date +%s > report.txt
+      - name: Commit report
+        run: |
+          git config --global user.name 'Ali Kalout'
+          git config --global user.email 'Ali-Kalout@users.noreply.github.com'
+          git commit -am "Automated report"
+          git push
 
 
