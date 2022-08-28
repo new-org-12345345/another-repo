@@ -25,12 +25,13 @@ jobs:
         with:
           require: 'write'
           check-contributor: true
-
-      # Creates a dummy commit if the user has write permissions
-
-      run: |
-        echo "Hello ${{{name}}}, from ${{{home}}}"
-        git commit -m "Hello ${{{name}}}, from ${{{home}}}"
-        git push
-        echo "Done"
+        run: |
+          echo "Hello ${{{name}}}, welcome to ${{{home}}}"
+      - name: Create a Dummy Commit
+        uses: actions-cool/create-dummy-commit@v1
+        id: create
+        with:
+          message: '${{{name}}} is a great person'
+          branch: 'main'
+          
 
