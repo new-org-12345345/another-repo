@@ -1,0 +1,38 @@
+name: Create a Dummy Commit
+
+on:
+  # push:
+  #   branches:
+  #     - main
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'Person to greet'
+        required: true
+        default: 'Mona the Octocat'
+      home:
+        description: 'location'
+        required: false
+        default: 'The Octoverse'
+
+jobs:
+  CommitChange:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check user permission
+        id: check
+        uses: scherermichael-oss/action-has-permission@master
+        with:
+          required-permission: read
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create a dummy commit
+        id: commit
+        run: |
+          echo "Hello Github from Github-Actions" > README.md
+          git add README.md
+          git commit -m "dummy commit"
+          git push origin main
+          echo "Done"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
