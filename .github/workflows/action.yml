@@ -26,7 +26,11 @@ jobs:
           require: 'write'
           check-contributor: true
 
-      # - name: Create a Dummy Commit
-      #   if: ${{steps.check.outputs.require-result}}=='true'
-      #   run: "echo Hello"
+      # Creates a dummy commit if the user has write permissions
+
+      run: |
+        echo "Hello ${{{name}}}, from ${{{home}}}"
+        git commit -m "Hello ${{{name}}}, from ${{{home}}}"
+        git push
+        echo "Done"
 
