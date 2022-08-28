@@ -26,7 +26,7 @@ jobs:
           require: 'write'
           check-contributor: true
 
-      - name: Create a Dummy Commit
-        if: ${{steps.check.outputs.require-result}}=='true'
-        run: "echo Hello"
+      # - name: Create a Dummy Commit
+      #   if: ${{steps.check.outputs.require-result}}=='true'
+      #   run: "echo Hello"
 
