@@ -19,22 +19,14 @@ jobs:
   CommitChange:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions-cool/check-user-permission@v2
+      - name: Check User Permissions
+        uses: actions-cool/check-user-permission@v2
         id: check
         with:
           require: 'write'
           check-contributor: true
 
-      # - run: echo "user-permission = ${{ steps.check.outputs.user-permission }}"
-      # - run: echo "require-result = ${{ steps.check.outputs.require-result }}"
-      # - run: echo "check-result = ${{ steps.check.outputs.check-result }}"cks if the actor has read access, and if so, creates a dummy commit.
-
-      # if the actor has write access, and if so, creates a dummy commit.
-      - if: '{{ steps.check.outputs.user-permission }}' == 'write'
-        run: echo "user-permission = ${{ steps.check.outputs.user-permission }}"
-
-
-
-
-
+      - name: Create a Dummy Commit
+        if: ${{steps.check.outputs.require-result}}=='true'
+        echo: 'Hello'
 
