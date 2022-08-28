@@ -19,20 +19,17 @@ jobs:
   CommitChange:
     runs-on: ubuntu-latest
     steps:
-      - name: Check user permission
+      - uses: actions-cool/check-user-permission@v2
         id: check
-        uses: scherermichael-oss/action-has-permission@master
         with:
-          required-permission: read
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Create a dummy commit
-        id: commit
-        run: |
-          echo "Hello Github from Github-Actions" > README.md
-          git add README.md
-          git commit -m "dummy commit"
-          git push origin main
-          echo "Done"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          require: 'write'
+          check-contributor: true
+
+      - run: echo "user-permission = ${{ steps.check.outputs.user-permission }}"
+      - run: echo "require-result = ${{ steps.check.outputs.require-result }}"
+      - run: echo "check-result = ${{ steps.check.outputs.check-result }}"cks if the actor has read access, and if so, creates a dummy commit.
+
+
+
+
+
