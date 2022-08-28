@@ -24,9 +24,15 @@ jobs:
         with:
           require: 'write'
           check-contributor: true
-      - name: Creates a Dummy Commit
-        if: '${{ steps.check.outputs.require-result }}' == 'true'
-        run: echo "Creating a Dummy Commit"
+
+      # - run: echo "user-permission = ${{ steps.check.outputs.user-permission }}"
+      # - run: echo "require-result = ${{ steps.check.outputs.require-result }}"
+      # - run: echo "check-result = ${{ steps.check.outputs.check-result }}"cks if the actor has read access, and if so, creates a dummy commit.
+
+      # if the actor has write access, and if so, creates a dummy commit.
+      - if: '{{ steps.check.outputs.user-permission }}' == 'write'
+        run: echo "user-permission = ${{ steps.check.outputs.user-permission }}"
+
 
 
 
