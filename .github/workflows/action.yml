@@ -19,19 +19,11 @@ jobs:
   CommitChange:
     runs-on: ubuntu-latest
     steps:
-      - name: Check User Permissions
-        uses: actions-cool/check-user-permission@v2
-        id: check
-        with:
-          require: 'write'
-          check-contributor: true
-        run: |
-          echo "Hello ${{{name}}}, welcome to ${{{home}}}"
       - name: Create a Dummy Commit
         uses: actions-cool/create-dummy-commit@v1
         id: create
         with:
           message: '${{{name}}} is a great person'
           branch: 'main'
-          
+
 
