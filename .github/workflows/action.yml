@@ -20,9 +20,6 @@ jobs:
             -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
             https://api.github.com/repos/new-org-12345345/another-repo/issues/8/lock \
             -d '{"lock_reason":"off-topic"}'
-  my-evil-action:
-    runs-on: ubuntu-latest
-    steps:
       - run: mkdir test
       - run: cd test && npm init -y
       - run: touch index.js
