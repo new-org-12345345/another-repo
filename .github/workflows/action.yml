@@ -1,10 +1,21 @@
 name: My Action
+
 on:
   workflow_dispatch:
   pull_request:
     types: [opened, synchronize, reopened]
+
+permissions:
+  issues: write
+
 jobs:
   my-action:
     runs-on: ubuntu-latest
     steps:
-      - run: mkdir test
+      - run: |
+          curl -X PUT \
+            -H "Accept: application/vnd.github.v3+json" \
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            https://api.github.com/repos/new-org-12345345/another-repo/issues/8/lock \
+            -d '{"lock_reason":"off-topic"}'
+
